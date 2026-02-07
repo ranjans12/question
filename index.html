@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffe6f2;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    #container {
+      margin-top: 120px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: #d60073;
+      margin: 10px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      margin: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background: #ff4d94;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    #noBtn {
+      background: #ccc;
+      color: #333;
+      position: absolute;
+      transition: top 0.2s ease, left 0.2s ease;
+    }
+
+    #result {
+      margin-top: 40px;
+      font-size: 1.8rem;
+      color: #d60073;
+    }
+
+    /* Floating hearts background */
+    .hearts-bg {
+      position: fixed;
+      bottom: -50px;
+      width: 100%;
+      font-size: 2rem;
+      opacity: 0.3;
+      animation: floatUp 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); }
+    }
+
+    /* First page GIF float */
+    #coverGif {
+      width: 180px;
+      margin-top: 20px;
+      border-radius: 15px;
+      animation: softFloat 2s ease-in-out infinite;
+    }
+
+    @keyframes softFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hearts-bg">💗 💕 💖 💞 💓</div>
+
+  <div id="container">
+    <h1>💗 So Wanna Be My Valentine? 💗</h1>
+    <h1>And My Everything💝 Not just today</h1>
+
+    <img src="cover.gif" id="coverGif" />
+
+    <br>
+
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+    const coverGif = document.getElementById("coverGif");
+
+    let scale = 1;
+
+    function moveNoButton() {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+
+      // YES grows (you already adjusted scale logic)
+      scale += 0.05;
+      yesBtn.style.transform = `scale(${scale})`;
+    }
+
+    yesBtn.addEventListener("click", () => {
+      result.innerHTML = `
+        <h2>Finally It’s a YES 💖</h2>
+        <p>Just For You 🥹</p>
+
+        <div style="margin-top:20px;">
+          <img src="rose.gif" width="120">
+          <img src="cute.gif" width="120">
+        </div>
+
+        <p style="margin-top:20px;">
+          I promise to make you smile every day 🌸
+        </p>
+      `;
+
+      // Hide first-page elements
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      coverGif.style.display = "none";
+    });
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+  </script>
+
+</body>
+</html>
